@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import deck, subject, card
+from .models import Deck, Subject, Card
 
 # Register your models here.
 
-admin.site.register(deck)
-admin.site.register(subject)
-admin.site.register(card)
+admin.site.register(Deck)
+admin.site.register(Subject)
+admin.site.register(Card)
