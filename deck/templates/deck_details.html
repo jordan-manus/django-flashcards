@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Title: {{ deck.title }}</h1>
+<h2>Subject: {{ deck.subject }}</h2>
+<h3><a href="{% url 'new-card' pk=deck.pk %}">Add a new card!</a></h3>
+
+
+{% endblock %}
+
+<!-- <h3>Edit this deck <a href="{% url 'edit-deck' deck.pk %}">here</a></h3> -->
+<!-- <h3>Delete this deck? <a href="{% url 'delete-deck' deck.pk %}">Click here!</a></h3> -->
