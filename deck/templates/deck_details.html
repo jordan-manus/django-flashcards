@@ -3,7 +3,19 @@
 {% block content %}
 <h1>Title: {{ deck.title }}</h1>
 <h2>Subject: {{ deck.subject }}</h2>
+
+{% for card in cards %}
+<p>{{card}}</p>
+{% endfor %}
+
 <h3><a href="{% url 'new-card' pk=deck.pk %}">Add a new card!</a></h3>
+<button type='button'
+    class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
+    <a href="{% url 'edit-deck' deck.pk %}">Edit</a></button>
+
+<button type='button'
+    class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
+    <a href="{% url 'delete-deck' deck.pk %}">Delete</a></button>
 
 
 {% endblock %}

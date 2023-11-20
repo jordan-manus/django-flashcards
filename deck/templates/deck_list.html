@@ -6,9 +6,9 @@
 <p>Make a <a href="{% url 'new-deck' %}">new</a> deck</p>
 
 <ul>
-{% for deck in decks %}
-<li>{{ deck }}</li>
-{% endfor %}
+    {% for deck in decks %}
+    <li>{{ deck }}</li>
+    {% endfor %}
 </ul>
 
 {% endblock %}

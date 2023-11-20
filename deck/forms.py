@@ -11,4 +11,4 @@ class DeckForm(forms.ModelForm):
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ("question", "answer")
+        fields = ("question", "answer", 'deck')

@@ -1,13 +1,18 @@
 from django.db import models
 from accounts.models import CustomUser
+# from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
+# class User(AbstractUser):
+#     def __str__(self):
+#         return self.username
+    
 
 class Deck(models.Model):
     title = models.CharField("Title", max_length=150, blank=True, null=True)
     subject = models.CharField("Subject", max_length=150, blank=True, null=True)
-    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    # user = models.ForeignKey('User', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
