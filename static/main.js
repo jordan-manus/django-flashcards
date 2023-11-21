@@ -6,12 +6,7 @@ cards.forEach((card) => {
     card.addEventListener('click', function () {
         console.log('clicked');
         console.log(card.classList);
-        // card.classList.toggle('is-flipped');
-        if (card.classList.contains('is-flipped')) {
-            card.classList.remove('is-flipped')
-        } else {
-            card.classList.add('is-flipped')
-        }
+        card.classList.toggle('is-flipped');
 
         console.log(card.classList);
     });
