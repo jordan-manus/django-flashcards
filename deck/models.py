@@ -12,7 +12,7 @@ from accounts.models import CustomUser
 class Deck(models.Model):
     title = models.CharField("Title", max_length=150, blank=True, null=True)
     subject = models.CharField("Subject", max_length=150, blank=True, null=True)
-    # user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users')
 
     def __str__(self):
         return self.title

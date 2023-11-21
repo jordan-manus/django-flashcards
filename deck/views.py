@@ -3,14 +3,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import DeckForm, CardForm
 from .models import Deck, Card
 from django.views import generic
-from accounts.models import CustomUser
+# from accounts.models import CustomUser
 
 # Create your views here.
 
 @login_required
 def deck_list(request):
     # decks = Deck.objects.filter(CustomUser=request.user)
-    decks = Deck.objects.all()
+    decks = Deck.objects.filter(user=request.user)
     # creates error when editing/deleting deck objects: 'WSGIRequest' object has no attribute 'username'
     return render(
                 request,
@@ -48,14 +48,15 @@ def new_card(request, pk):
         )
 
 
-class DeckDetailsView(generic.DetailView):
-    model = Deck
-    template_name = 'deck_details.html'
+# class DeckDetailsView(generic.DetailView):
+#     model = Deck
+#     template_name = 'deck_details.html'
     # does card_details need to be added here?
 
-def card_details(request, deck_pk):
-    cards = Card.object.filter(deck_id=deck_pk)
-    return render(request, 'deck_details.html', {'cards': cards})
+def card_details(request, pk):
+    deck = get_object_or_404(Deck, pk=pk)
+    cards = Card.objects.filter(deck=deck)
+    return render(request, 'deck_details.html', {'cards': cards, 'deck': deck})
     
 
 def edit_deck(request, pk):
