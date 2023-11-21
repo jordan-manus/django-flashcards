@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import DeckForm, CardForm
 from .models import Deck, Card
 from django.views import generic
+import random
 # from accounts.models import CustomUser
 
 # Create your views here.
@@ -81,23 +82,23 @@ def delete_deck(request, pk):
     return redirect('home')
 
 
-def edit_card(request, deck_pk):
-    card = get_object_or_404(Card, pk=deck_pk)
+def edit_card(request, pk, card_pk):
+    card = get_object_or_404(Card, pk=card_pk)
 
     if request.method == 'GET':
-        context = {'form': CardForm(instance=card), 'pk':deck_pk}
+        context = {'form': CardForm(instance=card), 'pk': card_pk}
         return render(request, 'new_card.html', context)
 
     elif request.method == 'POST':
         form = CardForm(request.POST, instance=card)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('deck-details', pk=pk)
         else:
             return render(request, 'new_card.html', {'form': form})
         
 
-def delete_deck(request, pk):
-    delete_deck = get_object_or_404(Deck, pk=pk)
-    delete_deck.delete()
-    return redirect('home')
+def delete_card(request, pk, card_pk):
+    delete_card = get_object_or_404(Card, pk=card_pk)
+    delete_card.delete()
+    return redirect('deck-details', pk=pk)
