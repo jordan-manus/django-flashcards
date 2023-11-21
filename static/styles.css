@@ -48,5 +48,21 @@ body {
 .card__face--answer {
     background-color: blueviolet;
     transform: rotateY(180deg);
-    z-index: 1;
+    /* z-index: 1; */
+}
+
+.button {
+    visibility: hidden;
+}
+
+
+button {
+    position: relative;
+    margin-top: 25px;
+}
+
+.button.show {
+    background-color: blue;
+    color: white;
+    visibility: visible;
 }

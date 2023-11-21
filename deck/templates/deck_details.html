@@ -6,21 +6,25 @@
 
 <div id="card-details" class="scene scene--card">
     {% for card in cards %}
-    <div class="card">
+    <div class="card " data-id={{card.pk}}>
         <span class="close">&times;</span>
-        <div class="card__face card__face--question">
+        <div class="card__face card__face--question" id={{card.pk}}>
             {{card.question}}
         </div>
         <div class="card__face card__face--answer">
             {{card.answer}}
         </div>
-        <button type='button'
-            class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
-            <a href="{% url 'edit-card' deck.pk card.pk %}">Edit</a></button>
-        <button type='button'
-            class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
-            <a href="{% url 'delete-card' deck.pk card.pk %}">Delete</a></button>
     </div>
+    <div class="confirm-buttons">
+        <button class="button " data-id={{card.pk}}>Did you get it right?</button>
+        <!-- <button class="button">Incorrect?</button> -->
+    </div>
+    <button type='button'
+        class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
+        <a href="{% url 'edit-card' deck.pk card.pk %}">Edit</a></button>
+    <button type='button'
+        class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
+        <a href="{% url 'delete-card' deck.pk card.pk %}">Delete</a></button>
     {% endfor %}
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>

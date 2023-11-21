@@ -18,7 +18,7 @@ def deck_list(request):
                 'deck_list.html',
                 {'decks': decks})
 
-
+@login_required
 def new_deck(request):
     if request.method == 'POST':
         form = DeckForm(request.POST)
@@ -34,6 +34,7 @@ def new_deck(request):
     )
 
 
+@login_required
 def new_card(request, pk):
     if request.method == 'POST':
         form = CardForm(request.POST)
@@ -49,17 +50,14 @@ def new_card(request, pk):
         )
 
 
-# class DeckDetailsView(generic.DetailView):
-#     model = Deck
-#     template_name = 'deck_details.html'
-    # does card_details need to be added here?
-
+@login_required
 def card_details(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     cards = Card.objects.filter(deck=deck)
     return render(request, 'deck_details.html', {'cards': cards, 'deck': deck})
     
 
+@login_required
 def edit_deck(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
 
@@ -75,13 +73,13 @@ def edit_deck(request, pk):
         else:
             return render(request, 'new_deck.html', {'form': form})
         
-
+@login_required
 def delete_deck(request, pk):
     delete_deck = get_object_or_404(Deck, pk=pk)
     delete_deck.delete()
     return redirect('home')
 
-
+@login_required
 def edit_card(request, pk, card_pk):
     card = get_object_or_404(Card, pk=card_pk)
 
@@ -97,7 +95,7 @@ def edit_card(request, pk, card_pk):
         else:
             return render(request, 'new_card.html', {'form': form})
         
-
+@login_required
 def delete_card(request, pk, card_pk):
     delete_card = get_object_or_404(Card, pk=card_pk)
     delete_card.delete()

@@ -7,7 +7,7 @@
 
 <ul>
     {% for deck in decks %}
-    <li>{{ deck }}</li>
+    <li><a href="{% url 'deck-details' deck.pk%}">{{ deck }}</a></li>
     {% endfor %}
 </ul>
 
