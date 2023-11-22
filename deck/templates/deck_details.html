@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<h1>This is deck details 2</h1>
 <h1>Title: {{ deck.title }}</h1>
 <h2>Subject: {{ deck.subject }}</h2>
+
 
 <div>
     <p>How many did you get right?</p>
@@ -11,44 +14,53 @@
 
 <div id="card-details" class="scene scene--card">
     {% for card in cards %}
-    <div class="card " data-id={{card.pk}}>
-        <span class="close">&times;</span>
-        <div class="card__face card__face--question" id={{card.pk}}>
+    <div class="card" data-id={{card.pk}}>
+        <div class="card__face card__face--question is-justify-content-center" id={{card.pk}}>
             {{card.question}}
         </div>
-        <div class="card__face card__face--answer">
+        <div class="card__face card__face--answer is-justify-content-center">
             {{card.answer}}
         </div>
     </div>
-    <div class="confirm-buttons">
-        <button class="button " data-id={{card.pk}}>Did you get it right?</button>
 
+    <div class="display-buttons">
+        <!-- button to count correct guesses -->
+        <button class="confirm-buttons congrats-button button is-info mr-3" data-id={{card.pk}}>Did
+            you get it right?</button>
+
+        <!-- buttons to edit delete cards -->
+        <button type='button' class="edit-card button is-warning ml-1 my-3">
+            <a href="{% url 'edit-card' deck.pk card.pk %}" class="edit-card button is-warning ">Edit</a></button>
+        <button type='button' class="delete-card button is-danger my-3">
+            <a href="{% url 'delete-card' deck.pk card.pk %}" class="delete-card button is-danger">Delete</a></button>
     </div>
-    <button type='button'
-        class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
-        <a href="{% url 'edit-card' deck.pk card.pk %}">Edit</a></button>
-    <button type='button'
-        class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
-        <a href="{% url 'delete-card' deck.pk card.pk %}">Delete</a></button>
+
     {% endfor %}
+
+    <!-- previous and next buttons -->
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 
-<div style="text-align:center">
+<!-- <div style="text-align:center">
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
+</div> -->
+
+
+<!-- buttons to create, edit, delete decks -->
+<div class="mt-5">
+    <button type="button" class="new-card button is-primary"><a href="{% url 'new-card' pk=deck.pk %}"
+            class="button is-primary">Add a new
+            card!</a></button>
+
+    <button type='button' class="button is-warning">
+        <a href="{% url 'edit-deck' deck.pk %}" class="button is-warning">Edit Deck</a></button>
+
+    <button type='button' class="button is-danger">
+        <a href="{% url 'delete-deck' deck.pk %}" class="button is-danger">Delete Deck</a></button>
 </div>
-
-<h3><a href="{% url 'new-card' pk=deck.pk %}">Add a new card!</a></h3>
-<button type='button'
-    class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
-    <a href="{% url 'edit-deck' deck.pk %}">Edit</a></button>
-
-<button type='button'
-    class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
-    <a href="{% url 'delete-deck' deck.pk %}">Delete</a></button>
 <br>
 
 
