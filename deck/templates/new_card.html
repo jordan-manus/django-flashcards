@@ -3,17 +3,19 @@
 <!-- <h1>Add new card!</h1> -->
 {% block content %}
 <h2>{% if pk %} Edit {% else %} New {% endif %} Card</h2>
-<form method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-    <div>
-        <label for="{{field.id_forlabel}}">{{ field.label }}</label>
-        {{ field }}
-    </div>
-    {% endfor %}
-    <div>
-        <button type="submit">Save</button>
-    </div>
-</form>
+<section class="section">
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="field ml-1">
+            <label for="{{field.id_forlabel}}" class="label">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div>
+            <button type="submit" class="button is-success is-small">Save</button>
+        </div>
+    </form>
+</section>
 
 {% endblock content %}

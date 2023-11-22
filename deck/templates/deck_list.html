@@ -2,27 +2,30 @@
 
 {% block content %}
 
-<h1>This is deck_list.html</h1>
+<h1 class="title is-flex is-justify-content-center"><i>Study flashcards!</i></h1>
 
+<section class="section is-large">
+    <p class="subtitle ">Current Decks: </p>
+    <ul>
+        {% for deck in decks %}
+        <li>
+            <!-- <span class="icon"> -->
+            <i class="fa">
+                <a href="{% url 'edit-deck' deck.pk %}" class="edit-icon">&#128221;</a>
+            </i>
+            <!-- </span> -->
+            <!-- <span class="icon ml-1"> -->
+            <i class="fa ml-0 mr-3">
+                <a href="{% url 'delete-deck' deck.pk %}" class="delete-icon">&#x1F5D1;</a>
+            </i>
+            <!-- </span> -->
+            <a href="{% url 'deck-details' deck.pk%}">{{ deck }}</a>
+            <span class="tag is-info is-light ml-6">{{deck.subject}}</span>
+        </li>
+        {% endfor %}
+    </ul>
 
-<ul>
-    {% for deck in decks %}
-    <li>
-        <!-- <span class="icon"> -->
-        <i class="fa">
-            <a href="{% url 'edit-deck' deck.pk %}" class="edit-icon">&#128221;</a>
-        </i>
-        <!-- </span> -->
-        <!-- <span class="icon ml-1"> -->
-        <i class="fa ml-0 mr-3">
-            <a href="{% url 'delete-deck' deck.pk %}" class="delete-icon">&#x1F5D1;</a>
-        </i>
-        <!-- </span> -->
-        <a href="{% url 'deck-details' deck.pk%}">{{ deck }}</a>
-    </li>
-    {% endfor %}
-</ul>
-
-<button class="new-deck button is-primary mt-2"><a href="{% url 'new-deck' %}" class="button is-primary">Create
+</section>
+<button class="new-deck button is-primary mt-2 ml-1"><a href="{% url 'new-deck' %}" class="button is-primary">Create
         Deck</a></button>
 {% endblock %}
