@@ -3,12 +3,26 @@
 {% block content %}
 
 <h1>This is deck_list.html</h1>
-<p>Make a <a href="{% url 'new-deck' %}">new</a> deck</p>
+
 
 <ul>
     {% for deck in decks %}
-    <li><a href="{% url 'deck-details' deck.pk%}">{{ deck }}</a></li>
+    <li>
+        <!-- <span class="icon"> -->
+        <i class="fa">
+            <a href="{% url 'edit-deck' deck.pk %}" class="edit-icon">&#128221;</a>
+        </i>
+        <!-- </span> -->
+        <!-- <span class="icon ml-1"> -->
+        <i class="fa ml-0 mr-3">
+            <a href="{% url 'delete-deck' deck.pk %}" class="delete-icon">&#x1F5D1;</a>
+        </i>
+        <!-- </span> -->
+        <a href="{% url 'deck-details' deck.pk%}">{{ deck }}</a>
+    </li>
     {% endfor %}
 </ul>
 
+<button class="new-deck button is-primary mt-2"><a href="{% url 'new-deck' %}" class="button is-primary">Create
+        Deck</a></button>
 {% endblock %}
