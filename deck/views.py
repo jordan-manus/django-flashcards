@@ -11,10 +11,7 @@ def deck_list(request):
     # decks = Deck.objects.filter(CustomUser=request.user)
     decks = Deck.objects.filter(user=request.user)
     # creates error when editing/deleting deck objects: 'WSGIRequest' object has no attribute 'username'
-    return render(
-                request,
-                'deck_list.html',
-                {'decks': decks})
+    return render(request, 'deck_list.html', {'decks': decks})
 
 @login_required
 def new_deck(request):

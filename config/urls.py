@@ -20,6 +20,6 @@ from deck import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('registration.backends.simple.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
     path('', include('deck.urls'))
 ]
