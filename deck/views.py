@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import DeckForm, CardForm
 from .models import Deck, Card
-from django.views import generic
 import random
-# from accounts.models import CustomUser
 
 # Create your views here.
 
@@ -23,7 +21,9 @@ def new_deck(request):
     if request.method == 'POST':
         form = DeckForm(request.POST)
         if form.is_valid():
-            form.save()
+            deck = form.save(commit=False)
+            deck.user = request.user
+            deck.save()
             return redirect('home')
     else:
         form = DeckForm()
@@ -36,10 +36,14 @@ def new_deck(request):
 
 @login_required
 def new_card(request, pk):
+    deck = get_object_or_404(Deck, pk=pk)
     if request.method == 'POST':
         form = CardForm(request.POST)
         if form.is_valid():
-            form.save()
+            card = form.save(commit=False)
+            card.user = request.user
+            card.deck = deck
+            card.save()
             return redirect('deck-details', pk=pk)
     else:
         form = CardForm()
@@ -54,6 +58,7 @@ def new_card(request, pk):
 def card_details(request, pk):
     deck = get_object_or_404(Deck, pk=pk)
     cards = Card.objects.filter(deck=deck)
+    cards = cards.order_by('?')
     return render(request, 'deck_details.html', {'cards': cards, 'deck': deck})
     
 

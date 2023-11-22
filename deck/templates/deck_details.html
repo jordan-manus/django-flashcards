@@ -4,6 +4,11 @@
 <h1>Title: {{ deck.title }}</h1>
 <h2>Subject: {{ deck.subject }}</h2>
 
+<div>
+    <p>How many did you get right?</p>
+    <p id="right_button_tally"></p>
+</div>
+
 <div id="card-details" class="scene scene--card">
     {% for card in cards %}
     <div class="card " data-id={{card.pk}}>
@@ -17,7 +22,7 @@
     </div>
     <div class="confirm-buttons">
         <button class="button " data-id={{card.pk}}>Did you get it right?</button>
-        <!-- <button class="button">Incorrect?</button> -->
+
     </div>
     <button type='button'
         class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
@@ -45,10 +50,7 @@
     class="block text-sm text-slate-500 mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold bg-violet-50 text-violet-700 hover:bg-violet-200">
     <a href="{% url 'delete-deck' deck.pk %}">Delete</a></button>
 <br>
-<div>
-    <p>How many did you get right?</p>
-    <p id="right_button_tally"></p>
-</div>
+
 
 
 {% endblock %}
